@@ -1,3 +1,7 @@
+# Try to locate Erlang
+ERLANG_PATH := $(shell erl -eval 'io:format("~s", [code:root_dir()])' -s init stop -noshell)
+ERL_INCLUDE := -I$(ERLANG_PATH)/usr/include
+
 .PHONY: help dev prod
 
 help: ## Display this help message
@@ -28,15 +32,25 @@ test: ## Run tests
     		tests/engine_test.cpp -o _build/test/lore_name_engine
 	@./_build/test/lore_name_engine
 
-prod: ## Compile prod build
-	@mkdir -p _build/prod
+release-elixir-nif: ## Compile NIF shared library
+	@mkdir -p _build/nif
 	g++ -std=c++23 \
 		-O3 \
 		-march=native \
-		-flto \
-		-DNDEBUG \
-		-s \
-		lib/engine.cpp -o _build/prod/lore_name_engine
+		-fPIC \
+		-shared \
+		$(ERL_INCLUDE) \
+		adapters/elixir_nif.cpp -o _build/nif/lore_name_engine_elixir_nif.so
+#
+#prod: ## Compile prod build
+#	@mkdir -p _build/prod
+#	g++ -std=c++23 \
+#		-O3 \
+#		-march=native \
+#		-flto \
+#		-DNDEBUG \
+#		-s \
+#		lib/engine.cpp -o _build/prod/lore_name_engine
 
 clean: ## Delete _build folder
 	rm -rf _build
