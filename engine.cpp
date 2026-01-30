@@ -4,7 +4,21 @@
 #include <iostream>
 
 namespace LoreNameEngine {
-	string generate(const Model& model, int override_min_len, int override_max_len) {
+	string generate(const vector<const Model*>& models, const int override_min_len = -1, const int override_max_len = -1) {
+		if (models.empty()) {
+			return "Error: no models provided";
+		}
+
+		static random_device rd;
+		static mt19937 rng(rd());
+
+		uniform_int_distribution<int> dist(0, models.size() - 1);
+		size_t index = dist(rng);
+
+		return generate(*models[index], override_min_len, override_max_len);
+	}
+
+	string generate(const Model& model, const int override_min_len = -1, const int override_max_len = -1) {
 		int min_len = (override_min_len != -1) ? override_min_len : model.min_len();
 		int max_len = (override_max_len != -1) ? override_max_len : model.max_len();
 
@@ -89,9 +103,11 @@ namespace LoreNameEngine {
 }
 
 int main() {
-	LoreNameEngine::Snake snake_model;
+	LoreNameEngine::Snake snake;
 
-	std::cout << LoreNameEngine::generate(snake_model, -1, -1) << std::endl;
+	static const std::vector<const LoreNameEngine::Model*> models = {&snake};
+
+	std::cout << LoreNameEngine::generate(models) << std::endl;
 
 	return 0;
 }

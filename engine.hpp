@@ -20,5 +20,6 @@ namespace LoreNameEngine {
 	static const string START = "__START__";
 	static const string END = "__END__";
 
-	string generate(const Model&);
+	string generate(const vector<const Model*>&, const int, const int);
+	string generate(const Model&, const int, const int);
 }
