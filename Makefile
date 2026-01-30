@@ -12,10 +12,21 @@ dev: ## Compile dev build
 		-Og \
 		-Wall -Wextra \
 		-Wno-unused-parameter \
-		engine.cpp -o _build/dev/lore_name_engine
+		lib/engine.cpp -o _build/dev/lore_name_engine
 
 run: dev ## Run dev build
 	./_build/dev/lore_name_engine
+
+test: ## Run tests
+	@mkdir -p _build/test
+	g++ -std=c++23 \
+    		-O3 \
+    		-march=native \
+    		-flto \
+    		-DNDEBUG \
+    		-s \
+    		tests/engine_test.cpp -o _build/test/lore_name_engine
+	@./_build/test/lore_name_engine
 
 prod: ## Compile prod build
 	@mkdir -p _build/prod
@@ -25,7 +36,7 @@ prod: ## Compile prod build
 		-flto \
 		-DNDEBUG \
 		-s \
-		engine.cpp -o _build/prod/lore_name_engine
+		lib/engine.cpp -o _build/prod/lore_name_engine
 
 clean: ## Delete _build folder
 	rm -rf _build

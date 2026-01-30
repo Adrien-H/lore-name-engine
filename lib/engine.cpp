@@ -144,16 +144,16 @@ namespace LoreNameEngine {
 	}
 }
 
-int main() {
-	LoreNameEngine::Snake snake;
-
-	static const std::vector<const LoreNameEngine::Model*> models = {&snake};
-
-	std::vector<std::string> names = LoreNameEngine::generate(models, 100, -1, -1);
-
-	for (const auto& name : names) {
-		std::cout << name << std::endl;
-	}
-
-	return 0;
-}
+//int main() {
+//	LoreNameEngine::Snake snake;
+//
+//	static const std::vector<const LoreNameEngine::Model*> models = {&snake};
+//
+//	std::vector<std::string> names = LoreNameEngine::generate(models, 100, -1, -1);
+//
+//	for (const auto& name : names) {
+//		std::cout << name << std::endl;
+//	}
+//
+//	return 0;
+//}
