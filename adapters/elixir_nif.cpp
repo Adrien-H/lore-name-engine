@@ -36,7 +36,7 @@ static ERL_NIF_TERM generate_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM ar
 		|| !enif_get_int(env, argv[2], &min_len)
 		|| !enif_get_int(env, argv[3], &max_len)) {
 		return enif_make_badarg(env);
-		}
+	}
 
 	const std::vector<const LoreNameEngine::Model*>* selected_models = nullptr;
 
