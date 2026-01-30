@@ -13,6 +13,8 @@ namespace LoreNameEngine {
 		virtual ~Model() = default;
 
 		virtual const Chain& chain() const = 0;
+		virtual const int min_len() const = 0;
+		virtual const int max_len() const = 0	;
 	};
 
 	static const string START = "__START__";
