@@ -10,7 +10,7 @@ using namespace std;
 
 void test_bounds() {
 	Snake snake;
-	cout << "[TEST] Check bounds (1000 iterations) ";
+	cout << "[TEST] Check bounds… ";
 
 	for (int i = 0; i < 1000; ++i) {
 		string name = generate(snake);
@@ -23,10 +23,23 @@ void test_bounds() {
 	cout << "✔️" << endl;
 }
 
+void test_batch() {
+	Snake snake;
+
+	cout << "[TEST] Check batch generation (1000 iterations) ";
+
+	static const std::vector<const Model*> models = {&snake};
+
+	std::vector<std::string> names = generate(models, 1000, -1, -1);
+
+	cout << "✔️" << endl;
+}
+
 int main() {
 	cout << "TESTING LORE NAME ENGINE" << endl;
 
 	test_bounds();
+	test_batch();
 
 	cout << "✅ ALL TESTS ARE OK ✅" << endl;
 }
