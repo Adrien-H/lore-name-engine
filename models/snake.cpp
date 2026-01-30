@@ -3,8 +3,8 @@
 namespace LoreNameEngine {
 
 	struct Snake : Model {
-		const int min_len() const override { return 3; }
-		const int max_len() const override { return 12; }
+		unsigned int min_len() const override { return 3; }
+		unsigned int max_len() const override { return 12; }
 		const Chain& chain() const override {
 			static const Chain chain = {
 				{START, {

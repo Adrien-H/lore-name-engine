@@ -39,10 +39,12 @@ namespace LoreNameEngine {
 				int weight = candidate.second;
 
 				if (candidate.first == END) {
-					if (result.length() < min_len) {
+					int current_len = static_cast<int>(result.length());
+
+					if (current_len < min_len) {
 						weight = 0;
-					} else if (result.length() >= max_len - 3) {
-						int urgency = (result.length() - (max_len - 3)) + 1;
+					} else if (current_len >= max_len - 3) {
+						int urgency = (current_len - (max_len - 3)) + 1;
 						weight *= (20 * urgency);
 					}
 				}
@@ -77,7 +79,8 @@ namespace LoreNameEngine {
 			}
 
 			// Security hard limit
-			if (result.length() + next.length() > max_len + 5) {
+			int potential_len = static_cast<int>(result.length()) + next.length();
+			if (potential_len > max_len + 5) {
 				break;
 			}
 
@@ -118,7 +121,7 @@ namespace LoreNameEngine {
 	) {
 		vector<string> results;
 
-		for (int i = 0; i < iterations; ++i) {
+		for (unsigned int i = 0; i < iterations; ++i) {
 			results.push_back(generate(model, override_min_len, override_max_len));
 		}
 
@@ -133,7 +136,7 @@ namespace LoreNameEngine {
 	) {
 		vector<string> results;
 
-		for (int i = 0; i < iterations; ++i) {
+		for (unsigned int i = 0; i < iterations; ++i) {
 			results.push_back(generate(models, override_min_len, override_max_len));
 		}
 
