@@ -42,4 +42,6 @@ int main() {
 	test_batch();
 
 	cout << "✅ ALL TESTS ARE OK ✅" << endl;
+
+	return 0;
 }
