@@ -11,7 +11,7 @@ help: ## Display this help message
 
 dev: ## Compile dev build
 	@mkdir -p _build/dev
-	g++ -std=c++23 \
+	@g++ -std=c++23 \
 		-g3 \
 		-Og \
 		-Wall -Wextra \
@@ -23,7 +23,7 @@ run: dev ## Run dev build
 
 test: ## Run tests
 	@mkdir -p _build/test
-	g++ -std=c++23 \
+	@g++ -std=c++23 \
     		-O3 \
     		-march=native \
     		-flto \
@@ -34,13 +34,13 @@ test: ## Run tests
 
 release-elixir-nif: ## Compile NIF shared library
 	@mkdir -p _build/nif
-	g++ -std=c++23 \
-		-O3 \
-		-march=native \
-		-fPIC \
-		-shared \
-		$(ERL_INCLUDE) \
-		adapters/elixir_nif.cpp -o _build/nif/lore_name_engine_elixir_nif.so
+	@g++ -std=c++23 \
+	-O3 \
+	-march=native \
+	-fPIC \
+	-shared \
+	$(ERL_INCLUDE) \
+	adapters/elixir_nif.cpp -o _build/nif/lore_name_engine_elixir_nif.so
 #
 #prod: ## Compile prod build
 #	@mkdir -p _build/prod
@@ -53,4 +53,4 @@ release-elixir-nif: ## Compile NIF shared library
 #		lib/engine.cpp -o _build/prod/lore_name_engine
 
 clean: ## Delete _build folder
-	rm -rf _build
+	@rm -rf _build
